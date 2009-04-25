@@ -1,0 +1,34 @@
+h1 {
+  margin-top: 2ex;
+  color:#454545;
+}
+
+h2 {
+  margin-top:-2ex;
+  color:#676767;
+}
+
+body {
+  font-size:14pt;
+}
+
+.container {
+  width:48em;
+}
+
+p {
+  width:32em;
+}
+
+img {
+  float: left;
+  margin-top:3px;
+  margin-right:6em;
+}
+
+h3.fine {
+  font-size:0.9em;
+}
+p.fine {
+  font-size:0.8em;
+}
