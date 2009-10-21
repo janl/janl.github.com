@@ -17,7 +17,8 @@ body {
 }
 
 .container {
-  width:48em;
+  width:40em;
+  margin-left:200px;
 }
 
 p {
@@ -36,4 +37,14 @@ h5.fine {
 }
 p.fine {
   font-size:0.8em;
+}
+
+h4.margin {
+  margin-left:-100px;
+  margin-bottom:-2.5ex;
+}
+
+h4.margin2 {
+  margin-left:-160px;
+  margin-bottom:-2.5ex;
 }
