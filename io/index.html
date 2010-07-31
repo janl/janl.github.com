@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style type="text/css" media="screen">
+  body {
+    font-size:14pt;
+    font-family:"Minion Pro";
+    width: 36em;
+    margin:4ex 0 12ex 4em;
+  }
+
+  code.block {
+    white-space: pre;
+    display: block;
+  }
+  .aside {
+    font-size:0.8em;
+    color:#666;
+  }
+</style>
+
+<title>io — Personal URL Shortening</title>
+
+<h1><em>io</em> — Personal URL Shortening</h1>
+
+<p>
+  <em>io</em> is a little piece of code that lets you run your own URL
+shortening service. It is free and open source and fun to use.
+
+<p>
+  The only requirement is <a href="http://couchdb.apache.org/">Apache
+  CouchDB</a>. Probably the easiest way to get your own instance is to
+  sign up for a free account at <a href="http://www.couch.io/get">Couchio</a>
+
+<h2>Getting Started</h2>
+
+<p>
+  If you haven’t already, set up an Admin user for your CouchDB. You can do so
+  by clicking on the <em>Fix This</em> link in the lower right corner of
+  Futon, the admin interface.
+
+<p>
+  There are two ways to get <em>io</em> installed:
+
+<p>
+  1. Use <a href="http://github.com/couchapp/couchapp">CouchApp</a>:
+
+<code class="block">
+  $ git clone git://github.com/janl/io.git
+  $ cd io
+  $ couchapp push . http://username:password@yourname.couchone.com/io
+</code>
+
+<p>2. Replicate it:
+
+<code class="block">
+  $ curl -X POST \
+    http://username:password@yourname.couchone.com/_replicate -d \
+    '{"source":"http://shorts.couchone.com/io", "target":"io", \
+    "create_target":true}'
+</code>
+
+<p class="aside">
+  (this all wants to be on one line, but should be copy-and-pastable)
+
+<h2>First Run</h2>
+
+<p>
+  Now go to <a href="http://yourname.couchone.com/io/_design/io/_rewrite">
+  http://yourname.couchone.com/io/_design/io/_rewrite</a> and enjoy a simple
+  interface to create short URLs.
+
+<p>
+  Your first short look something like this:
+
+<code class="block">
+    http://yourname.couchone.com/io/_design/io/_rewrite/xKcD
+</code>
+
+<p>
+  This isn’t very short. — Do not dispair, CouchDB’s <em>vhosts</em> to the
+  rescue!
+
+<p>
+  For simplicity, we assume you are using Couchio’s hosting, but the same is
+  possible with every other CouchDB installation, there might be more manual
+  steps involved like setting DNS entries and whatnot.
+
+<p>
+  First, create a new vhost or <em>virtual host</em> in your CouchDB
+  configuration. You can do this in Futon or through a simple
+  <code>curl</code> command:
+
+<code class="block">
+  $ curl -X PUT \
+  http://username:password@yourname.couchone.com/_config/vhosts/s.yourname.couchone.com \
+  -d '"/io/_design/io/_rewrite/"'
+</code>
+
+<p>
+  Now go to <a href="http://s.yourname.couchone.com">s.yourname.couchone.com</a>
+  and enjoy shorter short URLs.
+
+<p>
+  Granted, this is still not as short as possible, but if you have your own
+  domain you want to use, just CNAME it to <code>yourname.couchone.com</code>,
+  add another vhost just like before and you are good to go.
+
+<h2>Contact <em>&amp;</em> License</h2>
+
+<p>(c) 2009–2010 Jan Lehnardt &lt;jan@apache.org&gt;, 
+<a href="http://github.com/janl/io/blob/master/LICENSE">MIT License</a>.
+
+<p>❧
